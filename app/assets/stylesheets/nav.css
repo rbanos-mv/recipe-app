@@ -1,0 +1,12 @@
+nav {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.select-menu ul {
+  display: flex;
+  flex-direction: row;
+  list-style-type: none;
+  gap: 1em;
+}
