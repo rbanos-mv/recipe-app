@@ -81,6 +81,11 @@ rspec
 - Twitter: [@RobertoBanosMV](https://twitter.com/RobertoBanosMV)
 - LinkedIn: [Roberto A Baños Alvarez](https://linkedin.com/in/roberto-a-baños-alvarez-500766234)
 
+👤 **Rafael E. Guzman Arias**
+
+- GitHub: [@rega1237](https://github.com/rega1237)
+- LinkedIn: [Rafael E. Guzman Arias](https://www.linkedin.com/in/rafael-eduardo-guzman/)
+
 ## 🤝 Contributing
 
 Contributions, issues, and feature requests are welcome!
