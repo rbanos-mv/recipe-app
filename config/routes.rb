@@ -6,6 +6,10 @@ Rails.application.routes.draw do
   get 'public_recipes', to: 'home#public_recipes'
   get 'shopping_list', to: 'home#shopping_list'
 
+  devise_for :users, controllers: {
+    sessions: 'users/sessions'
+  }
+
   resources :foods, except: :update
 
   resources :recipes, except: :update do
