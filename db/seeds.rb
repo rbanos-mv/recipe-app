@@ -6,8 +6,20 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
+
 user0 = User.create(name: 'Rafael')
 user1 = User.create(name: 'Roberto')
+
+def setpwd(user)
+  user.password = 'valido'
+  user.password_confirmation = 'valido'
+  user.confirm
+  user
+end
+
+user0 = setpwd(User.new(name: 'Rafael', email: 'rafael@mail.com'))
+setpwd(User.new(name: 'Roberto', email: 'roberto@mail.com'))
+
 
 food0 = Food.create(user: user0, name: 'Apple', measurement_unit: 'grams', price: 5, quantity: 50)
 food1 = Food.create(user: user0, name: 'Pineapple', measurement_unit: 'grams', price: 1, quantity: 20)
