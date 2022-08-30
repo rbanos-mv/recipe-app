@@ -1,0 +1,49 @@
+<%= render partial: "shared/nav-menu"%>
+<div class="show-container">
+  <div class="show-recipe-container">
+    <h2><%= @recipe.name %></h2>
+    <div class="public-status">
+      <p><%= @recipe.preparation_time %> Hours</p>
+      <%if @recipe.public %>
+        <h3>Status: Public</h3>
+      <%else%>
+        <h3> Status: Private </h3>
+      <%end%>
+    </div>
+    <p><%= @recipe.cooking_time %> Hours</p>
+    <p><%= @recipe.description %></p>
+    <div class="show-btns">
+      <%=link_to shopping_list_path, :class => 'btn' do%>
+        <h4>Generate shopping list</h4>
+      <%end%>
+      <%=link_to new_food_path, :class => 'btn' do%>
+        <h4>Add new ingredent</h4>
+      <%end%>
+    </div>
+  </div>
+
+  <div class="table-food">
+    <table class="tg">
+    <thead>
+      <tr>
+        <th class="tg-0lax">Food</th>
+        <th class="tg-0lax">Quantity</th>
+        <th class="tg-0lax">Value</th>
+        <th class="tg-0lax">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @recipe_foods.each do |food| %>
+        <tr>    
+          <td class="tg-0lax"><%= food.food.name %></td>
+          <td class="tg-0lax"><%= food.quantity %></td>
+          <td class="tg-0lax"><%= food.food.price %></td>
+          <td class="tg-0lax">
+            <%=link_to "Modify", edit_food_path(food.food.id) %>
+            <%= link_to "Remove", food_path, data: { turbo_method: :delete } %>
+          </td>
+        </tr>
+      <%end%>
+    </tbody>
+  </table>
+</div>

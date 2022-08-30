@@ -3,8 +3,10 @@
   <%@recipes.each do |recipe|%>
     <div class="recipe-container">
       <div class="title-container">
-        <h2><%= recipe.name%><h2>
-        <%= button_to 'Remove', recipe_path(recipe.id), method: :delete, class: "delete-btn" %>
+        <%=link_to user_recipe_path(recipe.user, recipe.id), :class => 'title-anchor' do%>
+          <h2><%= recipe.name%><h2>
+        <%end%>
+        <%= button_to 'Remove', user_recipe_path(recipe.user, recipe.id), method: :delete, class: "delete-btn" %>
       </div>
       <div class="description-container">
         <p><%= recipe.description %></p>

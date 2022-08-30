@@ -6,6 +6,15 @@
   gap: 1.2em;
 }
 
+.title-container {
+  flex: 1;
+}
+
+.title-anchor {
+  text-decoration: none;
+  color: black;
+}
+
 .recipe-container {
   display: flex;
   flex-direction: row;
