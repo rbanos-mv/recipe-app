@@ -1,0 +1,14 @@
+<%= render partial: "shared/nav-menu"%>
+<div class="recipes-container">
+  <%@recipes.each do |recipe|%>
+    <div class="recipe-container">
+      <div class="title-container">
+        <h2><%= recipe.name%><h2>
+        <%= button_to 'Remove', recipe_path(recipe.id), method: :delete, class: "delete-btn" %>
+      </div>
+      <div class="description-container">
+        <p><%= recipe.description %></p>
+      </div>
+    </div>
+  <%end%>
+</div>

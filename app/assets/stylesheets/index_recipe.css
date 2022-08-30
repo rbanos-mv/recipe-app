@@ -1,0 +1,21 @@
+.recipes-container{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  gap: 1.2em;
+}
+
+.recipe-container {
+  display: flex;
+  flex-direction: row;
+  gap: 1.5em;
+  align-items: center;
+  width: 60%;
+  border: solid 1px black;
+  padding: 1em;
+}
+
+.description-container {
+  width: 80%;
+}
