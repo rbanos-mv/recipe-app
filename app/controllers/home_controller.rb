@@ -1,19 +1,18 @@
 class HomeController < ApplicationController
-  # before_action :authenticate_user!
-  # load_and_authorize_resource
-
   include HomeHelper
 
   def index
     # implement
   end
 
-  def read
-    p '==============================000'
-    authorize! :read, current_user
+  def public_recipes
+    # implement
   end
 
   def shopping_list
+    authenticate_user!
+
     @items, @total = calculate_shopping
+    authorize! :read, current_user
   end
 end
