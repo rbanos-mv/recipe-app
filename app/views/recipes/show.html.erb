@@ -28,9 +28,11 @@
       <%=link_to shopping_list_path, :class => 'btn' do%>
         <h4>Generate shopping list</h4>
       <%end%>
-      <%=link_to new_food_path, :class => 'btn' do%>
-        <h4>Add new ingredent</h4>
-      <%end%>
+      <% if can? :destroy, @recipe %>
+        <%=link_to new_food_path, :class => 'btn' do%>
+          <h4>Add new ingredent</h4>
+        <%end%>
+      <% end %>
     </div>
   </div>
 

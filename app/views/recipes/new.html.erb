@@ -7,12 +7,12 @@
     </div>
 
     <div>
-      <%= form.label :Preparation_time_in_hours%> <br>
+      <%= form.label :Preparation_time%> <br>
       <%= form.text_field :preparation_time%>
     </div>
 
     <div>
-      <%= form.label :Cooking_time_in_hours%> <br>
+      <%= form.label :Cooking_time%> <br>
       <%= form.text_field :cooking_time%>
     </div>
   
@@ -22,11 +22,8 @@
     </div>
 
     <div>
-      <%= form.label :Public_recipe? %> <br>
-      <%= form.radio_button :public, true %>
-      <%= form.label :public_true, "Yes" %>
-      <%= form.radio_button :public, false %>
-      <%= form.label :public_false, "No" %>
+      <%= check_box_tag(:public) %>
+      <%= label_tag(:public, "Yes this recipe will be public!") %>
     </div>
 
     <%= form.submit%>

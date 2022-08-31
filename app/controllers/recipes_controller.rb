@@ -1,6 +1,7 @@
 class RecipesController < ApplicationController
+  before_action :authenticate_user!
   def index
-    @recipes = Recipe.where(user: current_user)
+    @recipes = Recipe.includes([:user]).where(user: current_user)
   end
 
   def show
@@ -17,7 +18,11 @@ class RecipesController < ApplicationController
 
   def create
     values = params.permit(:name, :preparation_time, :cooking_time, :description, :public)
-    @public = values[:public] == 'true'
+    if values[:public] == "1"
+      @public = true
+    else
+      @public = false
+    end
     @recipe = Recipe.new(user: current_user, name: values[:name], preparation_time: values[:preparation_time],
                          cooking_time: values[:cooking_time], description: values[:description], public: @public)
 
