@@ -18,11 +18,7 @@ class RecipesController < ApplicationController
 
   def create
     values = params.permit(:name, :preparation_time, :cooking_time, :description, :public)
-    if values[:public] == "1"
-      @public = true
-    else
-      @public = false
-    end
+    @public = values[:public] == '1'
     @recipe = Recipe.new(user: current_user, name: values[:name], preparation_time: values[:preparation_time],
                          cooking_time: values[:cooking_time], description: values[:description], public: @public)
 
