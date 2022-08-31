@@ -15,4 +15,5 @@ Rails.application.routes.draw do
   resources :recipes, except: :update do
     resources :recipe_foods, only: %i[create destroy update]
   end
+
 end

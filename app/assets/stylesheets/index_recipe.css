@@ -1,0 +1,43 @@
+.new-recipe {
+  text-align: center;
+  padding: 10px 0 30px 0;
+}
+
+.new-recipe > a {
+  text-decoration: none;
+  color: black;
+  font-size: 1.5em;
+  border: solid 1px black;
+  padding: 0.5em;
+}
+
+.recipes-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  gap: 1.2em;
+}
+
+.title-container {
+  flex: 1;
+}
+
+.title-anchor {
+  text-decoration: none;
+  color: black;
+}
+
+.recipe-container {
+  display: flex;
+  flex-direction: row;
+  gap: 1.5em;
+  align-items: center;
+  width: 60%;
+  border: solid 1px black;
+  padding: 1em;
+}
+
+.description-container {
+  width: 80%;
+}

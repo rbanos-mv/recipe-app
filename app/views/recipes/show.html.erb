@@ -1,0 +1,63 @@
+<%= render partial: "shared/nav-menu"%>
+<div class="show-container">
+  <div class="show-recipe-container">
+    <h2><%= @recipe.name %></h2>
+    <div class="public-status">
+      <p>Preparation Time: <%= @recipe.preparation_time %></p>
+      <%if @recipe.public %>
+        <div class="public-status-btn">
+          <p> Public </p>
+          <label class="switch">
+            <input type="checkbox" checked disabled>
+            <span class="slider round"></span>
+          </label>
+        </div>
+      <%else%>
+        <div class="public-status-btn">
+          <p> Public </p>
+          <label class="switch">
+            <input type="checkbox" disabled>
+            <span class="slider round"></span>
+          </label>
+        </div>
+      <%end%>
+    </div>
+    <p>Cooking Time: <%= @recipe.cooking_time %></p>
+    <p><%= @recipe.description %></p>
+    <div class="show-btns">
+      <%=link_to shopping_list_path, :class => 'btn' do%>
+        <h4>Generate shopping list</h4>
+      <%end%>
+      <% if can? :destroy, @recipe %>
+        <%=link_to new_food_path, :class => 'btn' do%>
+          <h4>Add new ingredent</h4>
+        <%end%>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="table-food">
+    <table class="tg">
+    <thead>
+      <tr>
+        <th class="tg-0lax">Food</th>
+        <th class="tg-0lax">Quantity</th>
+        <th class="tg-0lax">Value</th>
+        <th class="tg-0lax">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @recipe_foods.each do |food| %>
+        <tr>    
+          <td class="tg-0lax"><%= food.food.name %></td>
+          <td class="tg-0lax"><%= food.quantity %></td>
+          <td class="tg-0lax"><%= food.food.price %></td>
+          <td class="tg-0lax">
+            <%=link_to "Modify", edit_food_path(food.food.id) %>
+            <%= link_to "Remove", food_path, data: { turbo_method: :delete } %>
+          </td>
+        </tr>
+      <%end%>
+    </tbody>
+  </table>
+</div>
