@@ -1,6 +1,6 @@
 class RecipesController < ApplicationController
   def index
-    @recipes = Recipe.includes([:user]).where(user: params[:user_id])
+    @recipes = Recipe.where(user: current_user)
   end
 
   def show
@@ -15,11 +15,16 @@ class RecipesController < ApplicationController
     redirect_to recipes_path
   end
 
-  def edit
-    if self.public
-      self.public = false
+  def create
+    values = params.permit(:name, :preparation_time, :cooking_time, :description, :public)
+    @public = values[:public] == 'true'
+    @recipe = Recipe.new(user: current_user, name: values[:name], preparation_time: values[:preparation_time],
+                         cooking_time: values[:cooking_time], description: values[:description], public: @public)
+
+    if @recipe.save
+      redirect_to recipes_path, notice: 'your post has been published successfully'
     else
-      self.public = true
+      render :new
     end
   end
 end

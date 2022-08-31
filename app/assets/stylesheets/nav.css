@@ -11,3 +11,8 @@ nav {
   list-style-type: none;
   gap: 1em;
 }
+
+.menu-elem li a {
+  text-decoration: none;
+  color: black;
+}

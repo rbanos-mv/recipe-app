@@ -12,9 +12,8 @@ Rails.application.routes.draw do
 
   resources :foods, except: :update
 
-  resources :users do
-    resources :recipes, except: :update do
-      resources :recipe_foods, only: %i[create destroy update]
-    end
+  resources :recipes, except: :update do
+    resources :recipe_foods, only: %i[create destroy update]
   end
+
 end

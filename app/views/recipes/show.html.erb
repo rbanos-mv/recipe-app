@@ -3,14 +3,26 @@
   <div class="show-recipe-container">
     <h2><%= @recipe.name %></h2>
     <div class="public-status">
-      <p><%= @recipe.preparation_time %> Hours</p>
+      <p><%= @recipe.preparation_time %></p>
       <%if @recipe.public %>
-        <h3>Status: Public</h3>
+        <div class="public-status-btn">
+          <p> Public </p>
+          <label class="switch">
+            <input type="checkbox" checked disabled>
+            <span class="slider round"></span>
+          </label>
+        </div>
       <%else%>
-        <h3> Status: Private </h3>
+        <div class="public-status-btn">
+          <p> Public </p>
+          <label class="switch">
+            <input type="checkbox" disabled>
+            <span class="slider round"></span>
+          </label>
+        </div>
       <%end%>
     </div>
-    <p><%= @recipe.cooking_time %> Hours</p>
+    <p><%= @recipe.cooking_time %></p>
     <p><%= @recipe.description %></p>
     <div class="show-btns">
       <%=link_to shopping_list_path, :class => 'btn' do%>

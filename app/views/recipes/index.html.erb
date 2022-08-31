@@ -1,12 +1,15 @@
 <%= render partial: "shared/nav-menu"%>
+<div class="new-recipe">
+  <%= link_to "Create new recipe", "/recipes/new" %>
+</div>
 <div class="recipes-container">
   <%@recipes.each do |recipe|%>
     <div class="recipe-container">
       <div class="title-container">
-        <%=link_to user_recipe_path(recipe.user, recipe.id), :class => 'title-anchor' do%>
+        <%=link_to recipe_path(recipe.id), :class => 'title-anchor' do%>
           <h2><%= recipe.name%><h2>
         <%end%>
-        <%= button_to 'Remove', user_recipe_path(recipe.user, recipe.id), method: :delete, class: "delete-btn" %>
+        <%= button_to 'Remove', recipe_path(recipe.id), method: :delete, class: "delete-btn" %>
       </div>
       <div class="description-container">
         <p><%= recipe.description %></p>

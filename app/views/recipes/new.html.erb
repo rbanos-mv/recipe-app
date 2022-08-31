@@ -1,0 +1,34 @@
+<div class="form">
+  <h1>New Recipe</h1> 
+  <%= form_with url: "/recipes", method: :post, class:"form-body" do |form| %>
+    <div>
+      <%= form.label :Name%> <br>
+      <%= form.text_field :name%>
+    </div>
+
+    <div>
+      <%= form.label :Preparation_time_in_hours%> <br>
+      <%= form.text_field :preparation_time%>
+    </div>
+
+    <div>
+      <%= form.label :Cooking_time_in_hours%> <br>
+      <%= form.text_field :cooking_time%>
+    </div>
+  
+    <div>
+      <%= form.label :Description%> <br>
+      <%= form.text_area :description%>
+    </div>
+
+    <div>
+      <%= form.label :Public_recipe? %> <br>
+      <%= form.radio_button :public, true %>
+      <%= form.label :public_true, "Yes" %>
+      <%= form.radio_button :public, false %>
+      <%= form.label :public_false, "No" %>
+    </div>
+
+    <%= form.submit%>
+  <%end%>
+</div>
