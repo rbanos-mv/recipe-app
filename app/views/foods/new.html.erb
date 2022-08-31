@@ -1,2 +1,11 @@
-<h1>Foods#new</h1>
-<p>Find me in app/views/foods/new.html.erb</p>
+<%= link_to "Home", root_path, class: "home-btn" %>
+<h1>New Food</h1>
+<hr/>
+
+<%= form_with model: @food, url: foods_path, scope: :food do |f| %>
+  <%= f.text_field :name, placeholder: "Name", required: true %>
+  <%= f.text_field :measurement_unit, placeholder: "Measurement Unit", required: true %>
+  <%= f.number_field :price, step: 1, placeholder: "Unit Price", required: true %>
+  <%= f.number_field :quantity, step: 1, placeholder: "Quantity", required: true %>
+  <%= f.submit %>
+<% end %>
