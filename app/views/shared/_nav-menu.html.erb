@@ -4,11 +4,11 @@
   </div>
   <div class= "select-menu">
     <ul class="menu-elem">
-      <li>Food List</li>
+      <li><%= link_to "Home Page", root_path %></li>
+      <li><%= link_to "Food List", foods_path %></li>
       <li><%= link_to "Recipe Lists", recipes_path%></li>
-      <li>Shopping List</li>
-      <li>Public Recipe List</li>
-      <li>About Page</li>
+      <li><%= link_to "Shopping List", shopping_list_path%></li>
+      <li><%= link_to "Public Recipe List", public_recipes_path%></li>
       <% if user_signed_in? %> 
         <li><%= link_to "Logout", destroy_user_session_path, data: { turbo_method: :delete } %></li>
       <% else %>
