@@ -5,6 +5,15 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+def description
+  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla porttitor, neque non vehicula laoreet, \
+leo nulla pellentesque odio, in malesuada lectus nisi sed elit. Sed id justo ut justo aliquam."[0..rand(100...300)]
+end
+
+def some_time
+  options = ['20 min', '30 Min', '1 Hour', '1.5 Hours']
+  options[rand(0..3)]
+end
 
 def setpwd(user)
   user.password = 'valido'
@@ -13,23 +22,41 @@ def setpwd(user)
   user
 end
 
-user0 = setpwd(User.new(name: 'Rafael', email: 'rafael@mail.com'))
-user1 = setpwd(User.new(name: 'Roberto', email: 'roberto@mail.com'))
+setpwd(User.new(id: 1, name: 'Rafael', email: 'rafael@mail.com'))
+setpwd(User.new(id: 2, name: 'Roberto', email: 'roberto@mail.com'))
 
+recipe_id = 0
+food_base = 1
+2.times do |user_id|
+  user = User.find(user_id + 1)
+  print user_id
+  food_max = rand(5...10)
+  food_max.times do |food|
+    food_id = food + 1
+    Food.create(user:, name: "Food #{food_id}", measurement_unit: 'grams', price: rand(1...10),
+                quantity: 1 * rand(5..10))
+  end
 
-food0 = Food.create(user: user0, name: 'Apple', measurement_unit: 'grams', price: 5, quantity: 50)
-food1 = Food.create(user: user0, name: 'Pineapple', measurement_unit: 'grams', price: 1, quantity: 20)
-food2 = Food.create(user: user0, name: 'Chicken breast', measurement_unit: 'unit', price: 2, quantity: 15)
+  recipe_max = rand(2...5)
+  recipe_max.times do
+    recipe_id += 1
+    Recipe.create(id: recipe_id, user:, name: "Recipe #{recipe_id}", preparation_time: some_time,
+                  cooking_time: some_time, description:, public: rand(0..1))
 
-recipe0 = Recipe.create(user: user0, name: 'Recipe 2', preparation_time: "1.5 Hours", cooking_time: "1.5 Hours",
-                        description: 'Steps go here', public: true)
-
-RecipeFood.create(quantity: 20, recipe: recipe0, food: food0)
-RecipeFood.create(quantity: 10, recipe: recipe0, food: food1)
-RecipeFood.create(quantity: 2, recipe: recipe0, food: food2)
-
-recipe1 = Recipe.create(name: 'Pizza', preparation_time: "1 Hour", cooking_time: "1.5 Hours", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla porttitor, neque non vehicula laoreet, leo nulla pellentesque odio, in malesuada lectus nisi sed elit. Sed id justo ut justo aliquam.", user: user0, public: false)
-Recipe.create(name: 'Cesar Salad', preparation_time: "30 Min", cooking_time: "20 min", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla porttitor, neque non vehicula laoreet, leo nulla pellentesque odio, in malesuada lectus nisi sed elit. Sed id justo ut justo aliquam.", user: user1, public: false)
-Recipe.create(name: 'Tomato Soup', preparation_time: "1 Hour", cooking_time: "1.5 Hours", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla porttitor, neque non vehicula laoreet, leo nulla pellentesque odio, in malesuada lectus nisi sed elit. Sed id justo ut justo aliquam.", user: user0)
-Recipe.create(name: 'Roast beef', preparation_time: "1 Hour", cooking_time: "1.5 Hours", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla porttitor, neque non vehicula laoreet, leo nulla pellentesque odio, in malesuada lectus nisi sed elit. Sed id justo ut justo aliquam.", user: user1)
-
+    used = []
+    ingredient_max = rand(3...6)
+    ingredient_max.times do
+      food_id = 0
+      loop do
+        food_id = food_base + rand(0..food_max)
+        unless used.include?(food_id)
+          used << food_id
+          break
+        end
+      end
+      RecipeFood.create(quantity: rand(5...10), recipe_id:, food_id:)
+      print '.'
+    end
+  end
+  food_base + food_max
+end
