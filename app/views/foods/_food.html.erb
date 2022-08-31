@@ -1,0 +1,9 @@
+<tr>
+  <td><%= food.name %></td>
+  <td><%= food.measurement_unit %></td>
+  <td><%= food.price %></td>
+  <td><%= food.quantity %></td>
+  <td>
+    <%= link_to 'Delete', food_path(food), data: { turbo_confirm: "Are you sure?", turbo_method: :delete } %>
+  </td>
+</tr>

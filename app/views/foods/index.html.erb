@@ -1,2 +1,20 @@
-<h1>Foods#index</h1>
-<p>Find me in app/views/foods/index.html.erb</p>
+<%= link_to "Home", root_path, class: "home-btn" %>
+<div>
+  <h1>Food</h1>
+
+  <div>
+    <%= button_to "Add Food", new_food_path, method: :get %>
+  </div>
+
+  <hr/>
+  <% unless @foods.empty? %>
+    <table>
+      <%= render 'thead' %>
+      <tbody>
+        <%= render @foods %>
+      </tbody>
+    </table>
+  <% else %>
+    <%= render html: '<p /><h1>You have no Foods in the database</h1>'.html_safe %>
+  <% end %>
+</div>
