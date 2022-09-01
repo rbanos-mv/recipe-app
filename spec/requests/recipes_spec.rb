@@ -27,4 +27,52 @@ RSpec.describe 'Recipes', type: :request do
       end
     end
   end
+
+  describe 'action recipes#destroy' do
+      subject!(:recipe) {Recipe.create(user:, name: "Arepa", description: "this is a description", preparation_time: "1 hour", cooking_time: "30 minutes", public: 1) }
+
+      before(:each) { delete recipe_path(recipe) }
+
+      it 'redirect to /recipes' do
+        expect(response).to redirect_to(recipes_path)
+      end
+
+      it 'deletes the recipe' do
+        expect(Recipe.where(id: recipe.id).exists?).to be(false)
+      end
+  end
+
+  describe 'action recipes#index' do
+
+      before(:each) { get recipes_path }
+
+      it 'returns http success' do
+        expect(response).to have_http_status(:success)
+      end
+
+      it 'render index template' do
+        expect(response).to render_template("index")
+      end
+
+      it 'has the correct placeholder text' do
+        expect(response.body).to include("Create new recipe")
+      end
+  end
+
+  describe 'action recipes#show' do
+    subject!(:recipe) {Recipe.create(user:, name: "Arepa", description: "this is a description", preparation_time: "1 hour", cooking_time: "30 minutes", public: 1) }
+    before(:each) { get recipe_path(recipe.id) }
+
+    it 'returns http success' do
+      expect(response).to have_http_status(:success)
+    end
+
+    it 'render show template' do
+      expect(response).to render_template("show")
+    end
+
+    it 'has the correct placeholder text' do
+      expect(response.body).to include("Preparation Time:")
+    end
+  end
 end
