@@ -17,7 +17,7 @@
           <% recipe.recipe_foods.includes([:food]).each do |food| %>
             <% @sum = @sum + (food.quantity * food.food.price) %>
           <%end%>
-          <%= @sum %>
+          $<%= @sum %>
         </p>
       </div>
     </div>
