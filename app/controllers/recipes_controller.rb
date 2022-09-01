@@ -1,5 +1,7 @@
 class RecipesController < ApplicationController
   before_action :authenticate_user!
+  load_and_authorize_resource
+
   def index
     @recipes = Recipe.where(user: current_user)
   end
@@ -17,15 +19,28 @@ class RecipesController < ApplicationController
   end
 
   def create
-    values = params.permit(:name, :preparation_time, :cooking_time, :description, :public)
-    @public = values[:public] == '1'
-    @recipe = Recipe.new(user: current_user, name: values[:name], preparation_time: values[:preparation_time],
-                         cooking_time: values[:cooking_time], description: values[:description], public: @public)
-
+    # values = params.permit(:name, :preparation_time, :cooking_time, :description, :public)
+    # @public = values[:public] == '1'
+    # @recipe = Recipe.new(user: current_user, name: values[:name], preparation_time: values[:preparation_time],
+    #                      cooking_time: values[:cooking_time], description: values[:description], public: @public)
     if @recipe.save
-      redirect_to recipes_path, notice: 'your recipe has been published successfully'
+      flash[:notice] = 'Recipe saved successfully'
     else
-      render :new
+      flash[:alert] = 'Recipe not saved'
     end
+    redirect_to recipes_path
+
+    # if @recipe.save
+    #   redirect_to recipes_path, notice: 'your recipe has been published successfully'
+    # else
+    #   render :new
+    # end
+  end
+
+  private
+
+  def recipe_params
+    params.require(:recipe).permit(:name, :description, :cooking_time, :preparation_time, :public)
+      .merge({ user_id: current_user.id })
   end
 end
