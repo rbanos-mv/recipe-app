@@ -22,41 +22,52 @@ def setpwd(user)
   user
 end
 
-setpwd(User.new(id: 1, name: 'Rafael', email: 'rafael@mail.com'))
-setpwd(User.new(id: 2, name: 'Roberto', email: 'roberto@mail.com'))
+users = [
+  setpwd(User.new(name: 'Rafael', email: 'rafael@mail.com')),
+  setpwd(User.new(name: 'Roberto', email: 'roberto@mail.com'))
+]
 
-recipe_id = 0
-food_base = 1
-2.times do |user_id|
-  user = User.find(user_id + 1)
-  print user_id
+def create_foods(user)
+  user_food_ids = []
+  id = user.id * 10
   food_max = rand(5...10)
-  food_max.times do |food|
-    food_id = food + 1
-    Food.create(user:, name: "Food #{food_id}", measurement_unit: 'grams', price: rand(1...10),
-                quantity: 1 * rand(5..10))
+  (3 + food_max).times do |i|
+    id += 1
+    food = Food.create(user:, name: "Food #{id}", measurement_unit: 'grams', price: rand(1...10),
+                       quantity: 1 * rand(5..10))
+    user_food_ids << food.id unless i < 3
   end
+  user_food_ids
+end
 
+def create_recipes(user, food_ids)
+  id = user.id * 10
   recipe_max = rand(2...5)
   recipe_max.times do
-    recipe_id += 1
-    Recipe.create(id: recipe_id, user:, name: "Recipe #{recipe_id}", preparation_time: some_time,
-                  cooking_time: some_time, description:, public: rand(0..1))
-
+    id += 1
+    recipe = Recipe.create(user:, name: "Recipe #{id}", preparation_time: some_time,
+                           cooking_time: some_time, description:, public: rand(0..1))
     used = []
     ingredient_max = rand(3...6)
     ingredient_max.times do
       food_id = 0
       loop do
-        food_id = food_base + rand(0..food_max)
-        unless used.include?(food_id)
-          used << food_id
-          break
-        end
+        index = rand(0..food_ids.length)
+        next if used.include?(index)
+
+        food_id = food_ids[index]
+        used << food_id
+        break
       end
-      RecipeFood.create(quantity: rand(5...10), recipe_id:, food_id:)
+      RecipeFood.create(quantity: rand(5...10), recipe:, food_id:)
       print '.'
     end
   end
-  food_base + food_max
+end
+
+2.times do |i|
+  user = User.find(users[i].id)
+
+  user_food_ids = create_foods(user)
+  create_recipes(user, user_food_ids)
 end

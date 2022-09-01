@@ -18,3 +18,74 @@
   margin: 0;
   box-sizing: border-box;
 }
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 10%;
+  width: 100%;
+}
+
+button,
+input[type=button],
+input[type=submit],
+input[type=reset] {
+  padding: 8px 16px;
+}
+
+table {
+  border: 1px black solid;
+  border-spacing: 0;
+}
+
+td,
+th {
+  border: 1px black solid;
+  padding: 12px;
+}
+
+th {
+  background-color: darkgrey;
+}
+
+tr:nth-child(odd) {
+  background-color: lightgray;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 8px 0;
+}
+
+.col-center {
+  align-items: center;
+}
+
+.col-sep-20 {
+  width: 20px;
+}
+
+.field {
+  padding: 4px 0;
+}
+
+.row,
+.actions {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 8px 0;
+  width: 100%;
+}
+
+.row-justify {
+  justify-content: space-between;
+}
+
+.row-right,
+.actions {
+  justify-content: flex-end;
+}

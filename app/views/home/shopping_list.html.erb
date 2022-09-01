@@ -1,24 +1,32 @@
-<%= link_to "Home", root_path, class: "home-btn" %>
 <h1>Shopping List</h1>
+<div class="column col-center">
+  <div class="row row-justify">
+    <h2>
+      Amount of food to buy:
+      <%= @items.length %>
+    </h2>
+    <span class="col-sep-20"></span>
+    <h2>
+      Total value of food needed: $
+      <%= @total %>
+    </div>
+  </h2>
 
-<div>Amount of food to buy:
-  <%= @items.length %></div>
-<div>Total value of food needed: $<%= @total %></div>
-
-<div>
-  <table>
-    <%= render 'thead' %>
-    <tbody>
-      <% @items.each do |item| %>
-        <tr>
-          <td><%= item.name %></td>
-          <td>
-            <%= item.quantity %>
-            <%= item.measurement_unit %>
-          </td>
-          <td>$<%= item.price %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+  <div>
+    <table>
+      <%= render 'thead' %>
+      <tbody>
+        <% @items.each do |item| %>
+          <tr>
+            <td><%= item.name %></td>
+            <td>
+              <%= item.quantity %>
+              <%= item.measurement_unit %>
+            </td>
+            <td>$<%= item.price %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>
