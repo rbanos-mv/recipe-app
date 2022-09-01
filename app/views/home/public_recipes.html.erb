@@ -1,0 +1,26 @@
+<%= render partial: "shared/nav-menu"%>
+<div class="new-recipe">
+  <%= link_to "Create new recipe", "/recipes/new" %>
+</div>
+<div class="recipes-container">
+  <%@recipes.each do |recipe|%>
+    <div class="recipe-container">
+      <div class="title-container">
+        <%=link_to recipe_path(recipe.id), :class => 'title-anchor' do%>
+          <h2><%= recipe.name%><h2>
+        <%end%>
+        <p>By <%= recipe.user.name %></p>
+      </div>
+      <div class="description-container">
+        <p>Total food items: <%= recipe.recipe_foods.length %></p>
+        <p>Total price: 
+          <%@sum=0%>
+          <% recipe.recipe_foods.each do |food| %>
+            <% @sum = @sum + (food.quantity * food.food.price) %>
+          <%end%>
+          <%= @sum %>
+        </p>
+      </div>
+    </div>
+  <%end%>
+</div>

@@ -6,7 +6,7 @@ class HomeController < ApplicationController
   end
 
   def public_recipes
-    # implement
+    @recipes = Recipe.where(public: true)
   end
 
   def shopping_list

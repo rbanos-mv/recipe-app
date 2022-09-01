@@ -1,7 +1,7 @@
 class RecipesController < ApplicationController
   before_action :authenticate_user!
   def index
-    @recipes = Recipe.includes([:user]).where(user: current_user)
+    @recipes = Recipe.where(user: current_user)
   end
 
   def show
@@ -23,7 +23,7 @@ class RecipesController < ApplicationController
                          cooking_time: values[:cooking_time], description: values[:description], public: @public)
 
     if @recipe.save
-      redirect_to recipes_path, notice: 'your post has been published successfully'
+      redirect_to recipes_path, notice: 'your recipe has been published successfully'
     else
       render :new
     end
