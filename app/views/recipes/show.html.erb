@@ -1,63 +1,58 @@
-<%= render partial: "shared/nav-menu"%>
-<div class="show-container">
-  <div class="show-recipe-container">
-    <h2><%= @recipe.name %></h2>
-    <div class="public-status">
-      <p>Preparation Time: <%= @recipe.preparation_time %></p>
-      <%if @recipe.public %>
-        <div class="public-status-btn">
-          <p> Public </p>
-          <label class="switch">
-            <input type="checkbox" checked disabled>
-            <span class="slider round"></span>
-          </label>
-        </div>
-      <%else%>
-        <div class="public-status-btn">
-          <p> Public </p>
-          <label class="switch">
-            <input type="checkbox" disabled>
-            <span class="slider round"></span>
-          </label>
-        </div>
-      <%end%>
+<h1><%= @recipe.name %></h1>
+<div class="column col-center width-60 gap-1">
+  <div class="row row-justify">
+    <div class="column">
+      <h2>Preparation Time: <%= @recipe.preparation_time %></h2>
+      <h2>Cooking Time: <%= @recipe.cooking_time %></h2>
     </div>
-    <p>Cooking Time: <%= @recipe.cooking_time %></p>
-    <p><%= @recipe.description %></p>
-    <div class="show-btns">
-      <%=link_to shopping_list_path, :class => 'btn' do%>
-        <h4>Generate shopping list</h4>
-      <%end%>
-      <% if can? :destroy, @recipe %>
-        <%=link_to new_food_path, :class => 'btn' do%>
-          <h4>Add new ingredent</h4>
-        <%end%>
-      <% end %>
+    <div>
+      <h3>Public<h3>
+      <label class="switch">
+        <input type="checkbox" <% if @recipe.public %>checked<% end %> disabled>
+        <span class="slider round"></span>
+      </label>
     </div>
   </div>
 
-  <div class="table-food">
-    <table class="tg">
+  <p><%= @recipe.description %></p>
+  
+  <div class="row row-justify">
+    <%=link_to shopping_list_path, :class => 'btn' do%>
+      <h4>Generate shopping list</h4>
+    <%end%>
+    <% if can? :destroy, @recipe %>
+      <%=link_to new_food_path, :class => 'btn' do%>
+        <h4>Add new ingredent</h4>
+      <%end%>
+    <% end %>
+  </div>
+
+  <table class="width-100">
     <thead>
       <tr>
-        <th class="tg-0lax">Food</th>
-        <th class="tg-0lax">Quantity</th>
-        <th class="tg-0lax">Price</th>
-        <th class="tg-0lax">Actions</th>
+        <th>Food</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Actions</th>
       </tr>
     </thead>
     <tbody>
-      <% @recipe_foods.each do |food| %>
-        <tr>    
-          <td class="tg-0lax"><%= food.food.name %></td>
-          <td class="tg-0lax"><%= food.quantity %></td>
-          <td class="tg-0lax"><%= food.food.price %></td>
-          <td class="tg-0lax">
-            <%=link_to "Modify", edit_food_path(food.food.id) %>
-            <%= link_to "Remove", food_path, data: { turbo_method: :delete } %>
-          </td>
-        </tr>
-      <%end%>
+      <% if @recipe_foods.empty? %>
+      <tr><td>Please, add foods to the recipe</td></tr>
+      <% else %>
+        <% @recipe_foods.each do |food| %>
+          <tr>    
+            <td><%= food.food.name %></td>
+            <td><%= food.quantity %></td>
+            <td><%= food.food.price %></td>
+            <td>
+              <%=link_to "Modify", edit_food_path(food.food.id) %>
+              <%= link_to "Remove", food_path, data: { turbo_method: :delete } %>
+            </td>
+          </tr>
+        <%end%>
+      <% end %>
     </tbody>
   </table>
+  <p></p>
 </div>
