@@ -30,7 +30,7 @@ users = [
 def create_foods(user)
   user_food_ids = []
   (0..9).each do |i|
-    id = (user.id * 10) + i
+    id = ((2 - (user.id % 2)) * 10) + i
     food = Food.create(user:, name: "Food #{id}", measurement_unit: 'grams', price: rand(1...10),
                        quantity: 1 * rand(5..10))
     user_food_ids << food.id unless i < 3
@@ -39,10 +39,10 @@ def create_foods(user)
 end
 
 def create_recipes(user, food_ids)
-  id = user.id * 10
+  # id = user.id * 10
   recipe_max = rand(2...5)
-  recipe_max.times do
-    id += 1
+  recipe_max.times do |i|
+    id = ((2 - (user.id % 2)) * 10) + i
     recipe = Recipe.create(user:, name: "Recipe #{id}", preparation_time: some_time,
                            cooking_time: some_time, description:, public: rand(0..1))
     add_ingredients(recipe, food_ids)
