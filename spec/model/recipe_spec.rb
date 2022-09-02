@@ -7,7 +7,8 @@ RSpec.describe Recipe, type: :model do
     @user.password_confirmation = 'valido'
     @user.confirm
     login_as(@user)
-    @recipe = Recipe.create(name: 'Pizza', preparation_time: "1 Hour", cooking_time: "1.5 Hours", description: "Lorem ipsum dolor sit amet", user: @user, public: false)
+    @recipe = Recipe.create(name: 'Pizza', preparation_time: '1 Hour', cooking_time: '1.5 Hours',
+                            description: 'Lorem ipsum dolor sit amet', user: @user, public: false)
   end
 
   context 'When testing the Recipe class' do
@@ -30,13 +31,13 @@ RSpec.describe Recipe, type: :model do
     it 'should contain a description' do
       expect(@recipe.description).to eq('Lorem ipsum dolor sit amet')
     end
-  
+
     context 'When testing Validations' do
       it 'should validate that name recipe isn\'t empty' do
         @recipe.name = nil
         expect(@recipe).not_to be_valid
       end
-  
+
       it 'should validate preparation time isn\'t empty' do
         @recipe.preparation_time = nil
         expect(@recipe).not_to be_valid
@@ -46,7 +47,7 @@ RSpec.describe Recipe, type: :model do
         @recipe.cooking_time = nil
         expect(@recipe).not_to be_valid
       end
-  
+
       it 'should validate description isn\'t empty' do
         @recipe.description = nil
         expect(@recipe).not_to be_valid

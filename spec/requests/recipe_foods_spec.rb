@@ -39,7 +39,7 @@ RSpec.describe 'RecipeFoods', type: :request do
     after(:each) { RecipeFood.where(recipe:, food:).destroy_all }
 
     it 'redirect to recipes#show' do
-      expect(response).to redirect_to(recipe_path(recipe.id))
+      expect(response).to redirect_to(recipe_recipe_food_path(recipe.id, food.id))
     end
 
     it 'Has correct placeholder text' do
