@@ -5,16 +5,19 @@ class RecipeFoodsController < ApplicationController
 
   def create
     if @recipe_food.save
-      flash[:notice] = 'Food saved successfully'
+      flash[:notice] = 'RecipeFood saved successfully'
     else
-      flash[:alert] = 'Food not saved'
+      flash[:alert] = 'RecipeFood not saved'
     end
     redirect_to recipe_path(params[:recipe_id])
   end
 
   def destroy
+    @recipe_food.recipe_id = nil
+    @recipe_food.food_id = nil
     @recipe_food.destroy
-    redirect_to recipe_path(params[:recipe_id])
+
+    redirect_to request.path
   end
 
   def new
