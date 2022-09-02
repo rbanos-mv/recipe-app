@@ -1,0 +1,7 @@
+<h2>Edit quantity of: <%= @recipe_food.food.name %>
+
+<%= form_with model: @recipe_food, url: recipe_recipe_food_path, method: :patch do |form| %>
+  <%= form.label :quantity %>
+  <%= form.number_field :quantity %>
+  <%= form.submit "Update" %>
+<% end %>

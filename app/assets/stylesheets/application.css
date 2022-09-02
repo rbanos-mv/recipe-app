@@ -72,6 +72,10 @@ tr:nth-child(odd) {
   padding: 4px 0;
 }
 
+.gap-1 {
+  gap: 1em;
+}
+
 .row,
 .actions {
   display: flex;
@@ -81,6 +85,10 @@ tr:nth-child(odd) {
   width: 100%;
 }
 
+.row-center {
+  justify-content: center;
+}
+
 .row-justify {
   justify-content: space-between;
 }
@@ -88,4 +96,12 @@ tr:nth-child(odd) {
 .row-right,
 .actions {
   justify-content: flex-end;
+}
+
+.width-60 {
+  width: 60%;
+}
+
+.width-100 {
+  width: 100%;
 }

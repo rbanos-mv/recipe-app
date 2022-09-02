@@ -1,6 +1,4 @@
-<%= render partial: "shared/nav-menu"%>
-
-<div class="recipes-container">
+<div class="column col-center width-60 gap-1">
   <%@recipes.includes([:recipe_foods]).each do |recipe|%>
     <div class="recipe-container">
       <div class="title-container">
@@ -22,4 +20,5 @@
       </div>
     </div>
   <%end%>
+  <p></p>
 </div>
