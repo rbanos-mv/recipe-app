@@ -3,12 +3,12 @@ class RecipesController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @recipes = Recipe.where(user: current_user)
+    @recipes = Recipe.includes([:user]).where(user: current_user)
   end
 
   def show
     @recipe = Recipe.find(params[:id])
-    @recipe_foods = RecipeFood.includes([:food]).where(recipe_id: params[:id])
+    @recipe_foods = RecipeFood.includes([:food]).includes([:recipe]).where(recipe_id: params[:id])
   end
 
   def destroy
