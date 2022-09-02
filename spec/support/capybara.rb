@@ -6,6 +6,6 @@ RSpec.configure do |config|
   end
 end
 
-Capybara.configure do |config|
-  config.run_server = false
-end
+# Capybara.configure do |config|
+#   config.run_server = false
+# end
