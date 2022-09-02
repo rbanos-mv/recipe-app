@@ -21,7 +21,7 @@
       <h4>Generate shopping list</h4>
     <%end%>
     <% if can? :create, @recipe %>
-      <%=link_to new_food_path, :class => 'btn' do%>
+      <%= link_to new_recipe_recipe_food_path(@recipe.id), class: "btn" do %>
         <h4>Add new ingredent</h4>
       <%end%>
     <% end %>
@@ -38,7 +38,7 @@
     </thead>
     <tbody>
       <% if @recipe_foods.empty? %>
-      <tr><td>Please, add foods to the recipe</td></tr>
+      <tr><td colspan="4">The food list is empty</td></tr>
       <% else %>
         <% @recipe_foods.each do |food| %>
           <tr>    
@@ -50,7 +50,7 @@
                 <%=link_to "Modify", edit_food_path(food.food.id) %>
               <% end %>
               <% if can? :destroy, food.recipe %>
-                <%= link_to "Remove", food_path, data: { turbo_method: :delete } %>
+                <%= link_to "Remove", recipe_recipe_food_path(food.recipe_id, food.food_id), data: { turbo_method: :delete } %>
               <% end %>
             </td>
           </tr>
