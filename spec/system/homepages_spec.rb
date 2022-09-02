@@ -1,7 +1,7 @@
 require 'rails_helper'
 require_relative '../requests/shared_file'
 
-RSpec.describe 'Homepages', type: :system do
+RSpec.describe 'Homepages', type: :feature do
   include_context 'request_context'
 
   describe 'index page:' do

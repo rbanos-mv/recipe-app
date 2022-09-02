@@ -1,7 +1,7 @@
 require 'rails_helper'
 require_relative '../requests/shared_file'
 
-RSpec.describe 'Foods', type: :system do
+RSpec.describe 'Foods', type: :feature do
   include_context 'request_context'
 
   describe 'foods#index page:' do
@@ -70,22 +70,9 @@ RSpec.describe 'Foods', type: :system do
 
   # ******************************************
   describe 'recipe_foods#new page:' do
-    let(:recipe) { Recipe.order(user:).first }
+    let(:recipe) { Recipe.where(user:).first }
     before(:each) do
       visit new_recipe_recipe_food_path(recipe.id)
-    end
-
-    context 'when form is filled' do
-      before(:each) do
-        select 'Food 12', from: 'recipe_food[food_id]'
-        fill_in 'food[quantity]', with: '2'
-      end
-
-      it 'it redirects to foods#index' do
-        first(:link_or_button, 'Create Food').click
-
-        expect(page).to have_current_path foods_path
-      end
     end
   end
 end
