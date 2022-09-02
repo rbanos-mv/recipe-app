@@ -61,4 +61,19 @@ RSpec.describe 'Homepages', type: :system do
       expect(page).to have_table
     end
   end
+
+  describe 'Public Recipe list:' do
+    before(:each) do
+      visit public_recipes_path
+    end
+
+    context 'when click recipe name' do
+      it 'redirects to recipe#show page' do
+        @recipe = Recipe.where(public: true).first
+        first(:link, @recipe.name).click
+
+        expect(page).to have_current_path recipe_path(@recipe.id)
+      end
+    end
+  end
 end
