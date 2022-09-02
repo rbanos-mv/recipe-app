@@ -31,8 +31,8 @@ class Ability
 
     can :read, :all
     can :create, Food
-    can :manage, Food, :user
-    can :manage, Recipe, :user
+    can :manage, Food, user: user
+    can :manage, Recipe, user: user
     can :manage, RecipeFood
   end
 end
