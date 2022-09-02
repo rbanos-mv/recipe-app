@@ -40,17 +40,17 @@
       <% if @recipe_foods.empty? %>
       <tr><td colspan="4">The food list is empty</td></tr>
       <% else %>
-        <% @recipe_foods.each do |food| %>
+        <% @recipe_foods.each do |recipe_food| %>
           <tr>    
-            <td><%= food.food.name %></td>
-            <td><%= food.quantity %></td>
-            <td><%= food.food.price %></td>
+            <td><%= recipe_food.food.name %></td>
+            <td><%= recipe_food.quantity %></td>
+            <td><%= recipe_food.food.price %></td>
             <td>
-              <% if can? :update, food.recipe %>
-                <%=link_to "Modify", edit_food_path(food.food.id) %>
+              <% if can? :update, recipe_food.recipe %>
+                <%=link_to "Modify", edit_recipe_recipe_food_path(@recipe, recipe_food) %>
               <% end %>
-              <% if can? :destroy, food.recipe %>
-                <%= link_to "Remove", recipe_recipe_food_path(food.recipe_id, food.food_id), data: { turbo_method: :delete } %>
+              <% if can? :destroy, recipe_food.recipe %>
+                <%= link_to "Remove", recipe_recipe_food_path(recipe_food.recipe_id, recipe_food.food_id), data: { turbo_method: :delete } %>
               <% end %>
             </td>
           </tr>

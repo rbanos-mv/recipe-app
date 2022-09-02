@@ -24,6 +24,10 @@ class RecipeFoodsController < ApplicationController
     @foods = Food.where(user: current_user)
   end
 
+  def edit
+    @recipe_food = RecipeFood.find(params[:id])
+  end
+
   def update
     @recipe_food.quantity = recipe_food_params[:quantity]
     @recipe_food.save
