@@ -1,5 +1,5 @@
 require 'rails_helper'
-
+# rubocop:disable Metrics/BlockLength
 RSpec.describe Recipe, type: :model do
   before do
     @user = User.new(name: 'Rafael', email: 'rega1237@mail.com')
@@ -55,3 +55,4 @@ RSpec.describe Recipe, type: :model do
     end
   end
 end
+# rubocop:enable Metrics/BlockLength
