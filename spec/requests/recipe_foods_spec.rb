@@ -18,6 +18,11 @@ RSpec.describe 'RecipeFoods', type: :request do
         expect(response).to redirect_to(recipe_path(recipe.id))
       end
 
+      it 'has the last inserted food' do
+        last = Food.last
+        expect(last).to eq(params[:recipe_food][:food])
+      end
+
       it 'Has correct placeholder text' do
         expect(response.body).to include(recipe_path(recipe.id))
       end
@@ -27,10 +32,13 @@ RSpec.describe 'RecipeFoods', type: :request do
   describe 'action recipe_foods#destroy' do
     subject!(:recipe_food) { RecipeFood.create(recipe:, food:, quantity: 1) }
 
-    before(:each) { delete recipe_recipe_food_path(recipe.id, food.id) }
+    before(:each) do
+      delete recipe_recipe_food_path(recipe.id, food.id)
+    end
+
     after(:each) { RecipeFood.where(recipe:, food:).destroy_all }
 
-    it 'redirect to /foods' do
+    it 'redirect to recipes#show' do
       expect(response).to redirect_to(recipe_path(recipe.id))
     end
 
@@ -41,12 +49,12 @@ RSpec.describe 'RecipeFoods', type: :request do
 
   describe 'action recipe_foods#update' do
     subject!(:recipe_food) { RecipeFood.create(recipe:, food:, quantity: 1) }
-    let(:params) { { recipe_food: { recipe:, food:, quantity: 5 } } }
+    let(:params) { { recipe_food: { recipe:, food:, quantity: 500 } } }
 
     before(:each) { put recipe_recipe_food_path(recipe.id, food.id), params: }
 
-    it 'returns http success' do
-      expect(response).to have_http_status(:success)
+    it 'redirect to recipes#show' do
+      expect(response).to redirect_to(recipe_path(recipe.id))
     end
   end
 end

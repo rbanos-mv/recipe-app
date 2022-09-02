@@ -14,6 +14,11 @@ RSpec.describe 'Foods', type: :request do
         expect(response).to redirect_to(foods_path)
       end
 
+      it 'has the name of the last inserted food' do
+        last = Food.last
+        expect(last.name).to eq(params[:food][:name])
+      end
+
       it 'Has correct placeholder text' do
         expect(response.body).to include(foods_path)
       end
@@ -46,7 +51,7 @@ RSpec.describe 'Foods', type: :request do
     end
 
     it 'Has correct placeholder text' do
-      expect(response.body).to include('Foods#index')
+      expect(response.body).to include('<h1>Food list</h1>')
     end
   end
 end
