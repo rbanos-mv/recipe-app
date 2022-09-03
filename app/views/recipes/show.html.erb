@@ -1,0 +1,62 @@
+<h1><%= @recipe.name %></h1>
+<div class="column col-center width-60 gap-1">
+  <div class="row row-justify">
+    <div class="column">
+      <h2>Preparation Time: <%= @recipe.preparation_time %></h2>
+      <h2>Cooking Time: <%= @recipe.cooking_time %></h2>
+    </div>
+    <div>
+      <h3>Public<h3>
+      <label class="switch">
+        <input type="checkbox" <% if @recipe.public %>checked<% end %> disabled>
+        <span class="slider round"></span>
+      </label>
+    </div>
+  </div>
+
+  <p><%= @recipe.description %></p>
+  
+  <div class="row row-justify">
+    <%=link_to shopping_list_path, :class => 'btn' do%>
+      <h4>Generate shopping list</h4>
+    <%end%>
+    <% if can? :create, @recipe %>
+      <%= link_to new_recipe_recipe_food_path(@recipe.id), class: "btn" do %>
+        <h4>Add new ingredient</h4>
+      <%end%>
+    <% end %>
+  </div>
+
+  <table class="width-100">
+    <thead>
+      <tr>
+        <th>Food</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if @recipe_foods.empty? %>
+      <tr><td colspan="4">The food list is empty</td></tr>
+      <% else %>
+        <% @recipe_foods.each do |recipe_food| %>
+          <tr>    
+            <td><%= recipe_food.food.name %></td>
+            <td><%= recipe_food.quantity %></td>
+            <td><%= recipe_food.food.price %></td>
+            <td>
+              <% if can? :update, recipe_food.recipe %>
+                <%=link_to "Modify", edit_recipe_recipe_food_path(@recipe, recipe_food) %>
+              <% end %>
+              <% if can? :destroy, recipe_food.recipe %>
+                <%= link_to "Remove", recipe_recipe_food_path(recipe_food.recipe_id, recipe_food.food_id), data: { turbo_method: :delete } %>
+              <% end %>
+            </td>
+          </tr>
+        <%end%>
+      <% end %>
+    </tbody>
+  </table>
+  <p></p>
+</div>

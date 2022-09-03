@@ -1,0 +1,20 @@
+<nav>
+  <div class= "column col-center">
+    <%= image_tag('https://cdn-icons-png.flaticon.com/512/1397/1397128.png', size: '55') %>
+    <h1>Recipe App</h1>
+  </div>
+  <div class= "select-menu">
+    <ul class="menu-elem">
+      <li><%= link_to_unless current_page?(root_path), "Home Page", root_path %></li>
+      <li><%= link_to "Food list", foods_path %></li>
+      <li><%= link_to "Recipe list", recipes_path%></li>
+      <li><%= link_to "Shopping list", shopping_list_path%></li>
+      <li><%= link_to "Public Recipe list", public_recipes_path%></li>
+      <% if user_signed_in? %> 
+        <li><%= link_to "Logout", destroy_user_session_path, data: { turbo_method: :delete } %></li>
+      <% else %>
+        <li><%= link_to "Login", new_user_session_path %></li>
+      <% end %>
+    </ul>
+  </div>
+</nav>

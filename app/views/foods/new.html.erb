@@ -1,0 +1,26 @@
+<h1>New Food</h1>
+<div class="column col-center">
+  <%= form_with model: @food, url: foods_path, scope: :food do |form| %>
+    <div class="field">
+      <%= form.label :Name %>
+      <br>
+      <%= form.text_field :name, placeholder: :Name, required: true %>
+    </div>
+    <div class="field">
+      <%= form.label :Measurement_Unit %>
+      <br>
+      <%= form.text_field :measurement_unit, placeholder: :Measurement_Unit, required: true %>
+    </div>
+    <div class="field">
+      <%= form.label :Unit_Price %>
+      <br>
+      <%= form.number_field :price, step: 1, placeholder: :Unit_Price, required: true %>
+    </div>
+    <div class="field">
+      <%= form.label :Quantity %>
+      <br>
+      <%= form.number_field :quantity, step: 1, placeholder: "Quantity", required: true %>
+    </div>
+    <div class="actions"><%= form.submit %></div>
+  <% end %>
+</div>

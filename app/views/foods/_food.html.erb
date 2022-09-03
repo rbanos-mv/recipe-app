@@ -1,0 +1,11 @@
+<tr>
+  <td><%= food.name %></td>
+  <td><%= food.measurement_unit %></td>
+  <td><%= food.price %></td>
+  <td><%= food.quantity %></td>
+  <td>
+    <% unless food.recipe_foods.exists? %>
+      <%= link_to 'Delete', food_path(food), data: { turbo_confirm: "Are you sure?", turbo_method: :delete } %>
+    <% end %>
+  </td>
+</tr>

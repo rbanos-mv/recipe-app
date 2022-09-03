@@ -1,8 +1,8 @@
 ![](https://img.shields.io/badge/Microverse-blueviolet)
 
-# Project Name
+# Recipe app
 
-> Description the project.
+> The Recipe app keeps track of all your recipes, ingredients, and inventory. It will allow you to save ingredients, keep track of what you have, create recipes, and generate a shopping list based on what you have and what you are missing from a recipe. Also, since sharing recipes is an important part of cooking the app should allow you to make them public so anyone can access them.
 
 ## Built With
 
@@ -52,6 +52,7 @@ rails secret
 - Type this commands into the terminal:
 
 ```
+rails db:create
 rails db:reset
 ```
 
@@ -80,6 +81,11 @@ rspec
 - GitHub: [@rbanos-mv](https://github.com/rbanos-mv)
 - Twitter: [@RobertoBanosMV](https://twitter.com/RobertoBanosMV)
 - LinkedIn: [Roberto A Baños Alvarez](https://linkedin.com/in/roberto-a-baños-alvarez-500766234)
+
+👤 **Rafael E. Guzman Arias**
+
+- GitHub: [@rega1237](https://github.com/rega1237)
+- LinkedIn: [Rafael E. Guzman Arias](https://www.linkedin.com/in/rafael-eduardo-guzman/)
 
 ## 🤝 Contributing
 

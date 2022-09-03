@@ -1,0 +1,14 @@
+.homepage {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  margin: 0 auto;
+  gap: 1em;
+  height: 70vh;
+  justify-content: center;
+}
+
+.author {
+  text-decoration: none;
+  color: black;
+}
