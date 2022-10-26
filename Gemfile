@@ -4,21 +4,16 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '3.1.2'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem 'rails', '~> 7.0.3', '>= 7.0.3.1'
+gem 'rails', '~> 7.0.4'
 
+# For windows/linux compatibility
 gem 'ffi'
 
 # Load environment variables
 gem 'dotenv-rails', require: 'dotenv/rails-now'
 
-# Make Rack-based apps CORS compatible
-gem 'rack-cors'
-
 # Authentication
 gem 'devise', '>= 4.0', '< 5.0'
-
-# JWT authentication for devise
-gem 'devise-jwt'
 
 # Authorization
 gem 'cancancan', '>= 3.0', '< 4.0'
@@ -65,12 +60,7 @@ gem 'bootsnap', require: false
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
-gem 'rswag-api'
-gem 'rswag-ui'
-
 group :development, :test do
-  gem 'rswag-specs'
-
   # Help to kill N+1 queries and unused eager loading
   gem 'bullet'
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -78,6 +68,8 @@ group :development, :test do
 end
 
 group :development do
+  # Beautify .erb files
+  gem 'erb-formatter'
   #  Preview email
   gem 'letter_opener'
 
