@@ -5,7 +5,9 @@
   <td><%= food.quantity %></td>
   <td>
     <% unless food.recipe_foods.exists? %>
-      <%= link_to 'Delete', food_path(food), data: { turbo_confirm: "Are you sure?", turbo_method: :delete } %>
+      <%= link_to 'Delete', food_path(food), 
+        data: { turbo_confirm: "Are you sure?", turbo_method: :delete },
+        class: 'btn btn-sm btn-danger' %>
     <% end %>
   </td>
 </tr>
