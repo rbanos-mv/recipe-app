@@ -1,32 +1,22 @@
-<h1>Shopping List</h1>
-<div class="column col-center">
-  <div class="row row-justify">
-    <h2>
-      Amount of food to buy:
-      <%= @items.length %>
-    </h2>
-    <span class="col-sep-20"></span>
-    <h2>
-      Total value of food needed: $
-      <%= @total %>
-    </div>
-  </h2>
+<section>
+  <h1 class='text-center mb-4'>Shopping List</h1>
+  <hr>
+  <h3 class='mb-3'>Amount of food to buy:
+    <%= @items.length %></h3>
+  <h3 class='mb-3'>Total value of food needed:
+    <%= number_to_currency @total %></h3>
+  <hr>
 
-  <div>
-    <table>
-      <%= render 'thead' %>
-      <tbody>
-        <% @items.each do |item| %>
-          <tr>
-            <td><%= item.name %></td>
-            <td>
-              <%= item.quantity %>
-              <%= item.measurement_unit %>
-            </td>
-            <td>$<%= item.price %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+  <div class="container mt-5" style="clear:both;">
+    <% unless @items.empty? %>
+      <table class="table">
+        <%= render 'thead' %>
+        <tbody>
+          <%= render partial: "item", collection: @items %>
+        </tbody>
+      </table>
+    <% else %>
+      <%= render html: '<p /><h1>There are no items in the shopping list</h1>'.html_safe %>
+    <% end %>
   </div>
-</div>
+</section>

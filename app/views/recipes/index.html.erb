@@ -1,21 +1,10 @@
-<div class="new-recipe">
-  <%= link_to "Create new recipe", "/recipes/new" %>
-</div>
-<div class="recipes-container">
-  <%@recipes.each do |recipe|%>
-    <div class="recipe-container">
-      <div class="title-container">
-        <h2>
-          <%=link_to recipe_path(recipe.id), :class => 'title-anchor' do%><%= recipe.name%><%end%>
-        </h2>
-        <% if can? :destroy, recipe %>
-          <%= button_to 'Remove', recipe_path(recipe.id), method: :delete, class: "delete-btn" %>
-        <% end %>
-      </div>
-      <div class="description-container">
-        <p><%= recipe.description %></p>
-      </div>
-    </div>
-  <%end%>
-  <p></p>
-</div>
+<section>
+  <h1 class="mt-2 text-center">Recipes</h1>
+  <hr>
+  <%= link_to 'Create new recipe', new_recipe_path, 
+  class: 'btn btn-primary float-end mb-4' %>
+  <div class="container mt-5" style="clear:both;">
+    <%= render @recipes %>
+    <p>&nbsp;</p>
+  </div>
+</section>

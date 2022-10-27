@@ -1,18 +1,18 @@
-<h1>Food list</h1>
-<div class="column col-center">
-  <div class="row row-right">
-    <%= button_to "Add Food", new_food_path, method: :get %>
-  </div>
-
+<section>
+  <h1 class="mt-2 text-center">Food list</h1>
   <hr/>
-  <% unless @foods.empty? %>
-    <table>
-      <%= render 'thead' %>
-      <tbody>
-        <%= render @foods %>
-      </tbody>
-    </table>
-  <% else %>
-    <%= render html: '<p /><h1>You have no Foods in the database</h1>'.html_safe %>
-  <% end %>
-</div>
+
+  <%= link_to 'Add Food', new_food_path, class: 'btn float-end btn-primary mt-1 mb-4' %>
+  <div class="container mt-5" style="clear:both;">
+    <% unless @foods.empty? %>
+      <table class="table">
+        <%= render 'thead' %>
+        <tbody>
+          <%= render @foods %>
+        </tbody>
+      </table>
+    <% else %>
+      <%= render html: '<p /><h1>You have no Foods in the database</h1>'.html_safe %>
+    <% end %>
+  </div>
+</section>

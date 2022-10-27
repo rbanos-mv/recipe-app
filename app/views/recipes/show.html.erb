@@ -1,11 +1,18 @@
-<h1><%= @recipe.name %></h1>
-<div class="column col-center width-60 gap-1">
-  <div class="row row-justify">
-    <div class="column">
-      <h2>Preparation Time: <%= @recipe.preparation_time %></h2>
-      <h2>Cooking Time: <%= @recipe.cooking_time %></h2>
+<h1 class="mt-2 text-center"><%= @recipe.name %></h1>
+<hr>
+<div class="container mt-5" style="clear:both;">
+  <div class='d-flex info-recipe justify-content-between '>
+    <div class=''>
+      <p class='mb-3 fs-5 fw-bold'>
+        Preparation time: 
+        <span class="fw-normal"><%=@recipe.preparation_time%></span> 
+      </p>
+      <p class='mb-3 fs-5 fw-bold'>
+        Cooking time: 
+        <span class="fw-normal"><%=@recipe.cooking_time%></span> 
+      </p>
     </div>
-    <div>
+    <div class=''>
       <h3>Public<h3>
       <label class="switch">
         <input type="checkbox" <% if @recipe.public %>checked<% end %> disabled>
@@ -13,50 +20,24 @@
       </label>
     </div>
   </div>
-
-  <p><%= @recipe.description %></p>
-  
-  <div class="row row-justify">
-    <%=link_to shopping_list_path, :class => 'btn' do%>
-      <h4>Generate shopping list</h4>
-    <%end%>
+  <p class='mb-3 fs-5'><%= @recipe.description %></p>
+  <div class='d-flex info-recipe justify-content-between '>
+    <%=link_to 'Generate shopping list', shopping_list_path, class: 'btn btn-primary' %>
     <% if can? :create, @recipe %>
-      <%= link_to new_recipe_recipe_food_path(@recipe.id), class: "btn" do %>
-        <h4>Add new ingredient</h4>
-      <%end%>
+      &nbsp;&nbsp;<%= link_to 'Add new ingredient', new_recipe_recipe_food_path(@recipe.id), class: 'btn btn-primary' %>
     <% end %>
   </div>
+  <p>&nbsp;</p>
 
-  <table class="width-100">
-    <thead>
-      <tr>
-        <th>Food</th>
-        <th>Quantity</th>
-        <th>Price</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% if @recipe_foods.empty? %>
-      <tr><td colspan="4">The food list is empty</td></tr>
-      <% else %>
-        <% @recipe_foods.each do |recipe_food| %>
-          <tr>    
-            <td><%= recipe_food.food.name %></td>
-            <td><%= recipe_food.quantity %></td>
-            <td><%= recipe_food.food.price %></td>
-            <td>
-              <% if can? :update, recipe_food.recipe %>
-                <%=link_to "Modify", edit_recipe_recipe_food_path(@recipe, recipe_food) %>
-              <% end %>
-              <% if can? :destroy, recipe_food.recipe %>
-                <%= link_to "Remove", recipe_recipe_food_path(recipe_food.recipe_id, recipe_food.food_id), data: { turbo_method: :delete } %>
-              <% end %>
-            </td>
-          </tr>
-        <%end%>
-      <% end %>
-    </tbody>
-  </table>
-  <p></p>
+  <% unless @recipe_foods.empty? %>
+    <table class="table">
+      <%= render 'thead' %>
+      <tbody>
+        <%= render @recipe_foods %>
+      </tbody>
+    </table>
+    <p>&nbsp;</p>
+  <% else %>
+    <%= render html: '<p /><h1>You have no Foods in the recipe</h1>'.html_safe %>
+  <% end %>
 </div>

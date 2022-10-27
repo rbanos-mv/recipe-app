@@ -1,24 +1,12 @@
-<div class="column col-center width-60 gap-1">
-  <%@recipes.includes([:recipe_foods]).each do |recipe|%>
-    <div class="recipe-container">
-      <div class="title-container">
-        <%=link_to recipe_path(recipe.id), :class => 'title-anchor' do%>
-          <h2><%= recipe.name%></h2>
-        <%end%>
-        <p>By <%= recipe.user.name %></p>
-      </div>
-  
-      <div class="description-container">
-        <p>Total food items: <%= recipe.recipe_foods.length %></p>
-        <p>Total price: 
-          <%@sum=0%>
-          <% recipe.recipe_foods.includes([:food]).each do |food| %>
-            <% @sum = @sum + (food.quantity * food.food.price) %>
-          <%end%>
-          $<%= @sum %>
-        </p>
-      </div>
-    </div>
-  <%end%>
-  <p></p>
-</div>
+<section>
+  <h1 class='text-center mb-4'>Public Recipes</h1>
+  <hr>
+  <div class="container mt-5" style="clear:both;">
+    <% unless @recipes.empty? %>
+      <%= render partial: "public", collection: @recipes %>
+      <p>&nbsp;</p>
+    <% else %>
+      <%= render html: '<p /><h1>There are no items in the shopping list</h1>'.html_safe %>
+    <% end %>
+  </div>
+</section>
