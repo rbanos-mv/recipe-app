@@ -1,0 +1,9 @@
+<%= turbo_frame_tag "toggle-public", class: 'switch-container' do %>
+  <%= form_with(model: @recipe) do |form| %>
+    <%= form.label "Public" %>
+    <label class="switch">
+      <%= form.submit "Public", class: @recipe.public ? "public" : "" %>
+      <span class="slider"/>
+    </label>
+  <% end %>
+<% end %>

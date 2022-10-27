@@ -1,0 +1,21 @@
+<% if flash.any? %>
+  <% flash.each do |name, msg| -%>
+    <% if name=='alert' %>
+      <div
+        class='alert alert-danger flash'
+        data-controller="removals"
+        data-action="animationend->removals#remove"
+      >
+        <%= msg %>
+      </div>
+    <% else %>
+      <div
+        class='alert alert-info flash'
+        data-controller="removals"
+        data-action="animationend->removals#remove"
+      >
+        <%= msg %>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>

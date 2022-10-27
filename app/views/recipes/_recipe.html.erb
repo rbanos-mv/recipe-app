@@ -1,0 +1,17 @@
+<div class="float-none card mt-3">
+  <div class="card-body">
+    <h3 class="card-title text-primary"><%= recipe.name %>
+      <% if recipe.public? %>
+        <span class="h5 text-secondary">by
+          <%= recipe.user.name %></span>
+      <% end %>
+    </h3>
+    <p class="card-text"><%= recipe.description %></p>
+    <%= link_to 'See Details', recipe_path(recipe.id), 
+        class: 'btn btn-primary' %>
+    <% if can? :destroy, recipe %>
+      <%= link_to 'Remove', recipe_path(recipe.id), data: {turbo_method: :delete, turbo_confirm: "Are you sure"},
+        class: 'btn btn-danger' %>
+    <% end %>
+  </div>
+</div>

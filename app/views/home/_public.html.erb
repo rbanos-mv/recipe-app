@@ -1,0 +1,26 @@
+<div class="float-none card mt-3">
+  <div class="card-body">
+    <h3 class="card-title"><%= public.name %></h3>
+    <% if public.public? %>
+      <h5>by
+        <%= public.user.name %></h5>
+    <% end %>
+    <p class="card-text"><%= public.description %></p>
+    <p>Total food items:
+      <%= public.recipe_foods.length %></p>
+    <p>Total price:
+      <% @sum=0 %>
+      <% public.recipe_foods.includes([:food]).each do |food| %>
+        <% @sum = @sum + (food.quantity * food.food.price) %>
+      <% end %>
+      $<%= @sum %>
+    </p>
+
+    <%= link_to 'See Details', recipe_path(public.id), 
+        class: 'btn btn-primary' %>
+    <% if can? :destroy, public %>
+      <%= link_to 'Remove', recipe_path(public.id), data: {turbo_method: :delete, turbo_confirm: "Are you sure"},
+        class: 'btn btn-danger' %>
+    <% end %>
+  </div>
+</div>

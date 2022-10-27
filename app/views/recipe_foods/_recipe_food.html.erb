@@ -1,0 +1,16 @@
+<tr>
+  <td><%= recipe_food.food.name %></td>
+  <td><%= recipe_food.quantity %></td>
+  <td><%= recipe_food.food.price %></td>
+  <td>
+    <% if can? :update, recipe_food.recipe %>
+      <%= link_to 'Modify', edit_recipe_recipe_food_path(@recipe, recipe_food),
+        class: 'btn btn-sm btn-primary' %>
+    <% end %>
+    <% if can? :destroy, recipe_food.recipe %>
+      <%= link_to 'Remove', recipe_recipe_food_path(recipe_food.recipe_id, recipe_food.food_id), 
+        data: { turbo_method: :delete },
+        class: 'btn btn-sm btn-danger' %>
+    <% end %>
+  </td>
+</tr>
