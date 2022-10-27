@@ -1,6 +1,6 @@
 module HomeHelper
   def calculate_needs
-    list = current_user.recipes.includes(%i[recipe_foods])
+    list = current_user.recipes
     needs = Hash.new { |k, v| k[v] = 0 }
     list.each do |recipe|
       ingredients = recipe.recipe_foods.pluck(:food_id, :quantity).group_by(&:shift).transform_values(&:flatten)

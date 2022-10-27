@@ -6,7 +6,7 @@ class HomeController < ApplicationController
   end
 
   def public_recipes
-    @recipes = Recipe.includes([:user]).where(public: true)
+    @recipes = Recipe.includes(%i[user recipe_foods]).where(public: true)
   end
 
   def shopping_list
