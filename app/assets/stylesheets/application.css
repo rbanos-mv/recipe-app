@@ -14,94 +14,63 @@
  *= require_self
  */
 
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,500&display=swap');
+
+*,
+*::before,
+*::after {
+  font-family: Roboto, Arial, Helvetica, sans-serif;
+}
+
 * {
   margin: 0;
   box-sizing: border-box;
 }
 
 body {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 0 10%;
-  width: 100%;
-}
-
-button,
-input[type=button],
-input[type=submit],
-input[type=reset] {
-  padding: 8px 16px;
-}
-
-table {
-  border: 1px black solid;
-  border-spacing: 0;
-}
-
-td,
-th {
-  border: 1px black solid;
-  padding: 12px;
-}
-
-th {
-  background-color: darkgrey;
-}
-
-tr:nth-child(odd) {
-  background-color: lightgray;
-}
-
-.column {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 8px 0;
-}
-
-.col-center {
-  align-items: center;
-}
-
-.col-sep-20 {
-  width: 20px;
+  padding: 1em 10%;
 }
 
 .field {
   padding: 4px 0;
 }
 
-.gap-1 {
-  gap: 1em;
+.author {
+  text-decoration: none;
+  color: black;
 }
 
-.row,
 .actions {
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: flex-end;
   padding: 8px 0;
   width: 100%;
 }
 
-.row-center {
-  justify-content: center;
+.flash {
+  position: fixed;
+  bottom: 4em;
+  right: 4em;
+  animation: appear-then-fade 3s both;
 }
 
-.row-justify {
-  justify-content: space-between;
+@keyframes appear-then-fade {
+  0%,
+  100% {
+    opacity: 0;
+  }
+
+  5%,
+  60% {
+    opacity: 1;
+  }
 }
 
-.row-right,
-.actions {
-  justify-content: flex-end;
-}
-
-.width-60 {
-  width: 60%;
-}
-
-.width-100 {
-  width: 100%;
+@media (max-width: 990px) {
+  body {
+    min-width: 350px;
+    padding: 1em 1px;
+  }
 }
